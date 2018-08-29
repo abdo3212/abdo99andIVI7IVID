@@ -112,7 +112,8 @@ ${users.join('\n')}
 client.on('message' , message => {
   var prefix = "+";
   if(message.author.bot) return;
-  if(message.content.startsWith(prefix +"role-bc")) {
+  if(message.content.startsWith(prefix + "role-bc")) {
+        if (!message.member.hasPermission('ADMINSTRATOR')) return message.reply(`**You Don't Have**  *ADMINSTRATOR*  **Permission **`).catch(console.error);
     let args = message.content.split(" ").slice(1);
 
     if(!args[0]) {
@@ -143,19 +144,6 @@ client.on('message' , message => {
         });
       message.channel.send(`**لقد تم ارسال هذه الرسالة الى ${message.guild.members.filter(m => m.roles.get(role.id)).size} عظو**`);
     }
-});
-
-
-client.on('message', message => {
-var prefix = "+";
-      if(message.content === prefix + "hide-ch") {
-      if(!message.channel.guild) return;
-      if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('You Dont Have Perms ❌');
-             message.channel.overwritePermissions(message.guild.id, {
-             READ_MESSAGES: false
- })
-              message.channel.send('Channel Hided Successfully ! ✅  ')
- }
 });
 	  
 
@@ -225,7 +213,165 @@ client.on("guildMemberAdd", member => {
 })
 	
 
+client.on('message', message =>{
+    let args = message.content.split(' ');
+    let prefix = '+'; //تقدر تغير البرفكس
+    
+    if(args[0] === `${prefix}avatar`){
+        let mentions = message.mentions.members.first()
+        if(!mentions) {
+          let sicon = message.author.avatarURL
+          let embed = new Discord.RichEmbed()
+          .setImage(message.author.avatarURL)
+          .setColor("#f7abab") 
+          .setDescription(`**${message.author.username}#${message.author.discriminator}**'s avatar :`);
+          message.channel.send({embed})
+        } else {
+          let sicon = mentions.user.avatarURL
+          let embed = new Discord.RichEmbed()
+          .setColor("#f7abab")
+          .setDescription(`**${mentions.user.username}#${mentions.user.discriminator}**'s avatar :`)
+          .setImage(sicon)
+          message.channel.send({embed})
+        }
+    };
+});
 
+
+
+	
+
+
+
+
+
+
+client.on('message', message => {
+
+     if (message.author.bot) return;
+    if (!message.channel.guild) return;
+    if (message.content.startsWith(prefix + 'mb')) {
+        if (!message.channel.guild) return;
+        let embed = new Discord.RichEmbed()
+            .setColor('RANDOM')
+            .setThumbnail(message.author.avatarURL)
+            .setFooter(message.author.username, message.author.avatarURL)
+
+        .setDescription(`**:battery: حالة اعضاء السيرفر**
+    
+**:green_heart: Online**  **[ ${message.guild.members.filter(m=>m.presence.status == 'online').size} ]**
+**:yellow_heart: Idle**       **[ ${message.guild.members.filter(m=>m.presence.status == 'idle').size} ]**  
+**:heart: DND**     **[ ${message.guild.members.filter(m=>m.presence.status == 'dnd').size} ]**
+**:black_heart: Offline** **[ ${message.guild.members.filter(m=>m.presence.status == 'offline').size} ]** `)
+
+        message.channel.send()
+
+        message.channel.sendEmbed(embed)
+    }
+});
+
+
+
+
+
+
+
+
+
+
+const secre = [
+  "**لو خيروك بين العيش وحدك في جزيرة كبيرة منعزلة مع أكبر درجات الرفاهية وبين العيش في مكان قديم ولكن مع أصدقائك المقربين**.",
+  "**لو خيروك بين فقدان ذاكرتك والعيش مع أصدقائك وأقربائك أو بقاء ذاكرتك ولكن العيش وحيد**.",
+  "**للو خيروك بين تناول الخضار والفاكهة طوال حياتك أو تناول اللحوم**.",
+  "**لو خيروك بين رؤية الأشباح فقط أو سماع صوتها فقط**.",
+  "**لو خيروك بين القدرة على سماع أفكار الناس أو القدرة على العودة في الزمن للخلف**.",
+  "**لو خيروك بين القدرة على الاختفاء أو القدرة على الطيران**.",
+  "**لو خيروك بين أن تعيش 5 دقائق في الماضي أو أن تعيشها في المستقبل**.",
+  "**لو خيروك بين 5 ملايين دولار أو 5 ملايين لحظة سعادة حقيقيةا**.",
+  "**لو خيروك بين الاعتذار عن خطأ اقترفته أو أن يقدم لك شخص أخطأ في حقق اعتذار**.",
+  "**لو خيروك بين الحقد أو المسامحة**.",
+  "**لو خيروك بين إنقاذ نفسك أو إنقاذ شخص وقد يعرضك ذلك للأذى**.",
+  "**لو خيروك بين أن تعيش في القرن الرابع عشر أو القرن الحالي**.",
+  "**لو خيروك بين امتلاك سرعة الفهد أو دهاء الثعلب**.",
+  "**لو خيروك بين أن تحصل على درجة كاملة في كامل اختباراتك القادمة والسابقة أو أن تسافر إلى بلد تحبه**.",
+  "**لو خيروك بين العيش بجانب الجبال والحدائق والأشجار أو العيش بجانب البحر**.",
+  "**لو خيروك بين تحقيق 3 أمنيات (لا تتعلق بأشخاص) أو اختيار 3 أشخاص للعيش معهم طوال حياتك**.",
+  "**لو خيروك بين النوم في غابة مظلمة أو على ظهر سفينة في يوم عاصف**.",
+  "**لو خيروك بين المال أو الجمال**.",
+  "**لو خيروك بين المال أو الذكاء**.",
+  "**لو خيروك بين المال أو الصحة**.",
+  "**لو خيروك بين الجمال أو الذكاء**.",
+  "**لو خيروك بين الذكاء أو الصحة**.",
+  "**لو خيروك بين إرسال رسالة صوتية لأمك مدة دقيقة كاملة لا تحتوي إلا على صراخك وخوفك، أو كسر بيضة نيئة على رأسك**.",
+]
+ 
+ 
+ client.on('message', message => {
+   if (message.content.startsWith("+لو خيروك")) {
+                if(!message.channel.guild) return message.reply('** This command only for servers**');
+  var embed = new Discord.RichEmbed()
+  .setColor('RANDOM')
+ 
+   .setThumbnail(message.author.avatarURL)
+ .addField('لعبه لو خيروك' ,
+  `${secre[Math.floor(Math.random() * secre.length)]}`)
+  message.channel.sendEmbed(embed);
+  console.log('[id] Send By: ' + message.author.username)
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const codes = {
+    ' ': '   ',
+    '0': '0⃣',
+    '1': '1⃣',
+    '2': '2⃣',
+    '3': '3⃣',
+    '4': '4⃣',
+    '5': '5⃣',
+    '6': '6⃣',
+    '7': '7⃣',
+    '8': '8⃣',
+    '9': '9⃣',
+    '!': '❕',
+    '?': '❔',
+    '#': '#⃣',
+    '*': '*⃣'
+  };
+  
+  'abcdefghijklmnopqrstuvwxyz'.split('').forEach(c => {
+    codes[c] = codes[c.toUpperCase()] = ` :regional_indicator_${c}:`;
+  });
+  
+  
+  client.on('message' , async message => {
+      var prefix = "+";
+         if(message.content.startsWith(prefix + "emoji")) {
+            let args = message.content.split(" ").slice(1);
+    if (args.length < 1) {
+      message.channel.send('You must provide some text to emojify!');
+  }
+  
+  message.channel.send(
+      args.join(' ')
+          .split('')
+          .map(c => codes[c] || c)
+          .join('')
+  );
+  };
+  });
 
 
 
