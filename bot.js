@@ -1332,7 +1332,161 @@ client.on('message', message => {
 });
 
 
+client.on('message', message => { 
+        if(!message.channel.guild) return;
+    if(message.content.startsWith(prefix + 'bc')) {
+    if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
+    if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
+    let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
+    let copy = "Rocket Bot";
+    let request = `Requested By ${message.author.username}`;
+    if (!args) return message.reply('**يجب عليك كتابة كلمة او جملة لإرسال البرودكاست**');message.channel.send(`**هل أنت متأكد من إرسالك البرودكاست؟ \nمحتوى البرودكاست:** \` ${args}\``).then(msg => {
+    msg.react('✅')
+    .then(() => msg.react('❌'))
+    .then(() =>msg.react('✅'))
 
+    let reaction1Filter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
+    let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
+    let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
+    let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
+    reaction1.on("collect", r => {
+    message.channel.send(`**☑ | تم ارسال البرودكاست لـ ${message.guild.members.size} عضو**`).then(m => m.delete(5000));
+    message.guild.members.forEach(m => {
+    var bc = new
+    Discord.RichEmbed()
+    .setColor('RANDOM')
+    .setTitle('Broadcast')
+    .addField('Server', message.guild.name)
+    .addField('Sender', message.author.username)
+    .addField('Message', args)
+    .setImage("https://cdn.discordapp.com/attachments/411527218225741836/457933565930504195/broadcast-icon-vector-graphics-eps-58991.png")
+    .setThumbnail(message.author.avatarURL)
+    .setFooter(copy, Rocket.user.avatarURL);
+    m.send({ embed: bc })
+    msg.delete();
+    })
+    })
+    reaction2.on("collect", r => {
+    message.channel.send(`**تم الغاء البرودكاست.**`).then(m => m.delete(5000));
+    msg.delete();
+    })
+    })
+    }
+    });
+
+            
+
+
+
+client.on('message', message => {
+      var prefix = "+";
+      if(message.content.startsWith(prefix + 'unmutevc')) {
+        if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.sendMessage("**ليس لديك صلاحية لاعطاء ميوت صوتي**❌ ").then(m => m.delete(5000));
+        if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return message.reply("**I Don't Have `MUTE_MEMBERS` Permission**").then(msg => msg.delete(6000))
+         
+      if(message.mentions.users.size === 0) {
+        return message.reply("Please mention a user to mute.");
+      }
+      let muteMember = message.guild.member(message.mentions.users.first());
+      if(!muteMember) {
+        return message.reply("Try again.");
+      }
+      muteMember.setMute(false);
+      if(muteMember) {
+        message.channel.sendMessage("User muted successfully.");
+      }
+    }
+  });
+
+
+client.on('message', message => {
+        var prefix = "+";
+        if(message.content.startsWith(prefix + 'deafen')) {
+      if (message.mentions.users.size === 0 && message.mentions.roles.size === 0) {
+        return message.reply('**يجب عليك المنشن اولاّ**❌').catch(console.error);
+      }
+      if (!message.guild.member(client.user).hasPermission('DEAFEN_MEMBERS')) {
+        return message.reply('للأسف البوت لا يمتلك صلاحيات لتنفيذ هذه الأمر**❌').catch(console.error);
+      }
+     
+      const deafenMember = (member) => {
+        if (!member || !member.voiceChannel) return;
+        if (member.serverDeaf) return message.channel.send(`${member} **لديه ديفن بالفعل**:x:`);
+        member.setDeaf(true).catch(console.error);
+        if(!message.member.hasPermission("DEAFEN_MEMBERS")) return message.channel.sendMessage("**ليس لديك صلاحية لاعطاء ديفن **❌ ").then(m => m.delete(5000));
+      };
+     
+      message.mentions.users.forEach(user => deafenMember(message.guild.member(user)));
+      message.mentions.roles.forEach(role => role.members.forEach(member => deafenMember(member)));
+        }
+        
+    });
+
+
+client.on('message', async message =>{
+      var prefix = "+";
+      if(message.content.startsWith(prefix + 'undeafen')) {
+     
+    if (message.mentions.users.size === 0 && message.mentions.roles.size === 0) {
+      return message.reply('**يجب عليك المنشن اولاّ**❌').catch(console.error);
+    }
+    if (!message.guild.member(client.user).hasPermission('DEAFEN_MEMBERS')) {
+      return message.reply('**للأسف البوت لا يمتلك صلاحيات لتنفيذ هذه الأمر**❌ ').catch(console.error);
+      if(!message.member.hasPermission("DEAFEN_MEMBERS")) return message.channel.sendMessage("**ليس لديك صلاحية لاعطاء ديفن **❌ ").then(m => m.delete(5000));
+    }
+     
+    const undeafenMember = (member) => {
+      if (!member || !member.voiceChannel) return;
+      if (!member.serverDeaf) return message.channel.send(`${member} `);
+      member.setDeaf(false).catch(console.error);
+    };
+     
+    message.mentions.users.forEach(user => undeafenMember(message.guild.member(user)));
+    message.mentions.roles.forEach(role => role.members.forEach(member => undeafenMember(member)));
+    }
+    });	
+	
+	
+client.on('message', message => {
+if(message.content.startsWith(prefix + 'create130')) {
+    let args = message.content.split(" ").slice(1);
+      var nam = args.join(' ');
+     if(!message.member.hasPermission('MANAGE_CHANNELS')) return    message.channel.send('**⚠ | `[MANAGE CHANNELS]` لا يوجد لديك صلاحية**').then(msg => msg.delete(6000))
+     if (!nam) return message.reply(`** ${prefix}create130 <أسم الروم>**`).then(msg => msg.delete(10000))
+     message.guild.createChannel(nam, 'voice').then(c => setTimeout(() => c.delete(), 5400000)) // كل 60 تساوي دقيقة عدل عليها الوق�� لي تبيه 
+     message.channel.send(`☑ TemporarySound : \`${nam}\``).then(c => setTimeout(() => c.edit(`<@${message.author.id}> ⏱  انتهى وقت الروم الصوتي`), 5400000))  // 5400000 دقيقتان
+   
+    }
+});	
+	
+	
+
+	
+	
+	
+
+
+
+client.on('message', message => {0
+           let args = message.content.split(' ').slice(1);
+    if(message.content.startsWith(prefix + 'speedy-give')) {
+    if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
+    if (message.author.id !== message.guild.owner.id) {     
+    message.channel.send('**هادا الامر لصاحب السيرفر فقط**' );
+      return;
+    }
+    const array = [];
+    message.guild.members.forEach((member) => {
+      array.push(member.user.tag);
+    });
+    const rand = array[Math.floor(Math.random() * array.length)];
+    message.channel.send(rand).then((m) => {
+      m.split('#');
+      m.edit(array);
+    });
+      
+    };
+});
 
 
 
