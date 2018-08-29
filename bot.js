@@ -659,6 +659,75 @@ client.on('message', async message =>{
 });	
 
 
+client.on('message', message => {
+  if (!message.content.startsWith(prefix)) return;
+  const verifed = ["406076958980571147"];
+if (message.content.startsWith(prefix + 'owner')) {
+if( verifed.some(word => message.author.id.includes(word)) ) {    return message.channel.sendMessage(`**   جا صاحب البوت هنا الكل يوقف**` + `✅`)
+} else {
+   message.reply('**انت لست صاحب البوت**' + '❌');   
+}
+}
+});
+
+
+
+  
+  
+
+  
+  client.on('message', message => {
+if(message.content.startsWith( prefix + "slots")) {
+  let slot1 = ['🍏', '🍇', '🍒', '🍍', '🍅', '🍆', '🍑', '🍓'];
+  let slots1 = `${slot1[Math.floor(Math.random() * slot1.length)]}`;
+  let slots2 = `${slot1[Math.floor(Math.random() * slot1.length)]}`;
+  let slots3 = `${slot1[Math.floor(Math.random() * slot1.length)]}`;
+  let we;
+  if(slots1 === slots2 && slots2 === slots3) {
+    we = "Win!"
+  } else {
+    we = "Lose!"
+  }
+  message.channel.send(`${slots1} | ${slots2} | ${slots3} - ${we}`)
+}
+});
+
+  const snekfetch = require("snekfetch");
+  client.on('message', async message => {
+if(message.author.bot) return;
+if (message.channel.guild) {
+if (message.content.startsWith(prefix + `cat`)) {
+            const { body } = await snekfetch.get("http://aws.random.cat/meow");
+            return message.channel.send({ file: body.file });
+}}});
+
+
+
+  client.on('message', message => {
+
+    if (message.content === prefix + "count") {
+
+    let embed = new Discord.RichEmbed()
+
+.addField('**Count**: ' , message.guild.memberCount)
+.setColor("#51cde6")
+.setDescription(`${message.guild.name}`)
+     message.channel.sendEmbed(embed);
+} 
+
+});
+ 
+
+
+  client.on('message', message => {
+    if(message.content == prefix + 'banded'){
+        message.guild.fetchBans().then(bans => {
+            bans.forEach(user => {
+               message.channel.send('\`#\` <@'+ user.id + '>');
+            });
+        });
+    }
+});
 
 
 
