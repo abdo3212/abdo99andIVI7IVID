@@ -375,11 +375,205 @@ const codes = {
 
 
 
+const Sra7a = [
+    'صراحه  |  صوتك حلوة؟',
+    'صراحه  |  التقيت الناس مع وجوهين؟',
+    'صراحه  |  شيء وكنت تحقق اللسان؟',
+    'صراحه  |  أنا شخص ضعيف عندما؟',
+    'صراحه  |  هل ترغب في إظهار حبك ومرفق لشخص أو رؤية هذا الضعف؟',
+    'صراحه  |  يدل على أن الكذب مرات تكون ضرورية شي؟',
+    'صراحه  |  أشعر بالوحدة على الرغم من أنني تحيط بك كثيرا؟',
+    'صراحه  |  كيفية الكشف عن من يكمن عليك؟',
+    'صراحه  |  إذا حاول شخص ما أن يكرهه أن يقترب منك ويهتم بك تعطيه فرصة؟',
+    'صراحه  |  أشجع شيء حلو في حياتك؟',
+    'صراحه  |  طريقة جيدة يقنع حتى لو كانت الفكرة خاطئة" توافق؟',
+    'صراحه  |  كيف تتصرف مع من يسيئون فهمك ويأخذ على ذهنه ثم ينتظر أن يرفض؟',
+    'صراحه  |  التغيير العادي عندما يكون الشخص الذي يحبه؟',
+    'صراحه  |  المواقف الصعبة تضعف لك ولا ترفع؟',
+    'صراحه  |  نظرة و يفسد الصداقة؟',
+    'صراحه  |  ‏‏إذا أحد قالك كلام سيء بالغالب وش تكون ردة فعلك؟',
+    'صراحه  |  شخص معك بالحلوه والمُره؟',
+    'صراحه  |  ‏هل تحب إظهار حبك وتعلقك بالشخص أم ترى ذلك ضعف؟',
+    'صراحه  |  تأخذ بكلام اللي ينصحك ولا تسوي اللي تبي؟',
+    'صراحه  |  وش تتمنى الناس تعرف عليك؟',
+    'صراحه  |  ابيع المجرة عشان؟',
+    'صراحه  |  أحيانا احس ان الناس ، كمل؟',
+    'صراحه  |  مع مين ودك تنام اليوم؟',
+    'صراحه  |  صدفة العمر الحلوة هي اني؟',
+    'صراحه  |  الكُره العظيم دايم يجي بعد حُب قوي " تتفق؟',
+    'صراحه  |  صفة تحبها في نفسك؟',
+    'صراحه  |  ‏الفقر فقر العقول ليس الجيوب " ، تتفق؟',
+    'صراحه  |  تصلي صلواتك الخمس كلها؟',
+    'صراحه  |  ‏تجامل أحد على راحتك؟',
+    'صراحه  |  اشجع شيء سويتة بحياتك؟',
+    'صراحه  |  وش ناوي تسوي اليوم؟',
+    'صراحه  |  وش شعورك لما تشوف المطر؟',
+    'صراحه  |  غيرتك هاديه ولا تسوي مشاكل؟',
+    'صراحه  |  ما اكثر شي ندمن عليه؟',
+    'صراحه  |  اي الدول تتمنى ان تزورها؟',
+    'صراحه  |  متى اخر مره بكيت؟',
+    'صراحه  |  تقيم حظك ؟ من عشره؟',
+    'صراحه  |  هل تعتقد ان حظك سيئ؟',
+    'صراحه  |  شـخــص تتمنــي الإنتقــام منـــه؟',
+    'صراحه  |  كلمة تود سماعها كل يوم؟',
+    'صراحه  |  **هل تُتقن عملك أم تشعر بالممل؟',
+    'صراحه  |  هل قمت بانتحال أحد الشخصيات لتكذب على من حولك؟',
+    'صراحه  |  متى آخر مرة قمت بعمل مُشكلة كبيرة وتسببت في خسائر؟',
+    'صراحه  |  ما هو اسوأ خبر سمعته بحياتك؟',
+    '‏صراحه | هل جرحت شخص تحبه من قبل ؟',
+    'صراحه  |  ما هي العادة التي تُحب أن تبتعد عنها؟',
+    '‏صراحه | هل تحب عائلتك ام تكرههم؟',
+    '‏صراحه  |  من هو الشخص الذي يأتي في قلبك بعد الله – سبحانه وتعالى- ورسوله الكريم – صلى الله عليه وسلم؟',
+    '‏صراحه  |  هل خجلت من نفسك من قبل؟',
+    '‏صراحه  |  ما هو ا الحلم  الذي لم تستطيع ان تحققه؟',
+    '‏صراحه  |  ما هو الشخص الذي تحلم به كل ليلة؟',
+    '‏صراحه  |  هل تعرضت إلى موقف مُحرج جعلك تكره صاحبهُ؟',
+     '‏صراحه  |  هل قمت بالبكاء أمام من تُحب؟',
+    '‏صراحه  |  ماذا تختار حبيبك أم صديقك؟',
+    '‏صراحه  | هل حياتك سعيدة أم حزينة؟',
+    'صراحه  |  ما هي أجمل سنة عشتها بحياتك؟',
+    '‏صراحه  |  ما هو عمرك الحقيقي؟',
+    '‏صراحه  |  ما اكثر شي ندمن عليه؟',
+    'صراحه  |  ما هي أمنياتك المُستقبلية؟‏',
+]
+  client.on('message', message => {
+if (message.content.startsWith(prefix + "صراحة")) {
+    if(!message.channel.guild) return message.reply('** This command only for servers **');
+ var client= new Discord.RichEmbed()
+ .setTitle("لعبة صراحة ..")
+ .setColor('RANDOM')
+ .setDescription(`${Sra7a[Math.floor(Math.random() * Sra7a.length)]}`)
+ .setImage("https://cdn.discordapp.com/attachments/371269161470525444/384103927060234242/125.png")
+                 .setTimestamp()
+ 
+  message.channel.sendEmbed(client);
+  message.react("??")
+}
+});
 
 
 
 
 
+client.on('message', emoko => {
+  if (emoko.content === "+date") {
+         if (!emoko.channel.guild) return emoko.reply('** This command only for servers **');  
+         var currentTime = new Date(),
+            hours = currentTime.getHours() + 4 ,
+            hours2 = currentTime.getHours() + 3 ,
+            hours3 = currentTime.getHours() + 2 ,
+            hours4 = currentTime.getHours() + 3 ,
+            minutes = currentTime.getMinutes(),
+            seconds = currentTime.getSeconds(),
+            Year = currentTime.getFullYear(),
+            Month = currentTime.getMonth() + 1,
+            Day = currentTime.getDate();
+             var h = hours
+  if(hours > 12) {
+               hours -= 12;
+            } else if(hours == 0) {
+                hours = "12";
+            }  
+             if(hours2 > 12) {
+               hours2 -= 12;
+            } else if(hours2 == 0) {
+                hours2 = "12";
+            
+            }  
+if(hours3 > 12) {
+               hours3 -= 12;
+            } else if(hours3 == 0) {
+                hours3 = "12";
+            } 
+            if (minutes < 10) {
+                minutes = '0' + minutes;
+            }
+
+
+            var suffix = 'صباحاَ';
+            if (hours >= 12) {
+                suffix = 'مساء';
+                hours = hours - 12;
+            }
+            if (hours == 0) {
+                hours = 12;
+            }
+ 
+
+const embed = new Discord.RichEmbed()
+                .setThumbnail("https://i.imgur.com/ib3n4Hq.png") 
+                .setTitle( "『التاريخ  والوقت』")
+                .setColor('RANDOM')
+                .setFooter(emoko.author.username, emoko.author.avatarURL)
+                .addField('الامارات',
+                "『"+ hours + ":" + minutes +":"+ seconds + "』")
+                 .addField('مكه المكرمه',
+                "『"+ hours2 + ":" + minutes +":"+ seconds  + "』") 
+                .addField('مصر',
+                "『"+ hours3 + ":" + minutes +":"+ seconds  + "』") 
+                
+                .addField('Date',
+                "『"+ Day + "-" + Month + "-" + Year +  "』")
+
+
+  emoko.channel.sendEmbed(embed);
+   }
+});
+
+client.on('message', message =>{
+    let messageArray = message.content.split(" ");
+    let cmd = messageArray[0];
+    let args = messageArray.slice(1);
+    let prefix = '+';
+
+if(cmd === `${prefix}suggest`) {
+    var suggestMessage = message.content.substring(7)
+    let suggestEMBED = new Discord.RichEmbed()
+    .setColor(3447003)
+    .setTitle("New suggest just added!!")
+    .setDescription(`**${suggestMessage}**`)
+    .setFooter(`Suggested By : ${message.author.tag}`);
+    message.delete().catch(O_o=>{}) 
+    let suggests = message.guild.channels.find(`name`, "suggests");
+    if (!suggests) return message.channel.send("You should make A **suggests** channel!")
+    suggests.send(suggestEMBED);
+}
+
+});
+
+
+client.on('message', message => { 
+     var prefix = "+"
+    if (message.content.startsWith(prefix + 'emoji-ser')) {
+
+        const List = message.guild.emojis.map(e => e.toString()).join(" ");
+
+        const EmojiList = new Discord.RichEmbed()
+            .setTitle('➠ Emojis') 
+            .setAuthor(message.guild.name, message.guild.iconURL) 
+            .setColor('RANDOM') 
+            .setDescription(List) 
+            .setFooter(message.guild.name) 
+        message.channel.send(EmojiList) 
+    }
+});
+
+client.on('message', message => {
+                                if(!message.channel.guild) return;
+                        if (message.content.startsWith(prefix +'ping')) {
+                            if(!message.channel.guild) return;
+                            var msg = `${Date.now() - message.createdTimestamp}`
+                            var api = `${Math.round(client.ping)}`
+                            if (message.author.bot) return;
+                        let embed = new Discord.RichEmbed()
+                        .setAuthor(message.author.username,message.author.avatarURL)
+                        .setColor('RANDOM')
+                        .addField('**Time Taken:**',msg + " ms 📶 ")
+                        .addField('**WebSocket:**',api + " ms 📶 ")
+         message.channel.send({embed:embed});
+                        }
+                    });
+	
 
 
 
