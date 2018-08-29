@@ -1,3 +1,5 @@
+const Discord = require('discord.js');
+const client = new Discord.Client();
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 client.user.setGame(`by abdo99 +help`,"http://twitch.tv")
@@ -1846,7 +1848,7 @@ client.on('guildMemberAdd', member => {
 
 
 
-const Discord = require("discord.js");
+
 const ytdl = require("ytdl-core");
 const { Client, Util } = require('discord.js');
 const getYoutubeID = require('get-youtube-id');
