@@ -113,7 +113,7 @@ client.on('message' , message => {
   var prefix = "+";
   if(message.author.bot) return;
   if(message.content.startsWith(prefix + "role-bc")) {
-        if (!message.member.hasPermission('ADMINSTRATOR')) return message.reply(`**You Don't Have**  *ADMINSTRATOR*  **Permission **`).catch(console.error);
+     if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply(لست من المشرفين لن يتم ارسال الرسالة إليك);
     let args = message.content.split(" ").slice(1);
 
     if(!args[0]) {
@@ -122,11 +122,11 @@ client.on('message' , message => {
     }
 
       if(args[0] == "@everyone") {
-        message.channel.send(`لقد تم ارسال هذه الرسالة الى ${message.guild.memberCount} اعضاء`);
+        message.channel.send(لقد تم ارسال هذه الرسالة الى ${message.guild.memberCount} اعضاء);
         message.guild.members.forEach(mi => {
           mi.send(
           "الرسالة :" + "\n" +
-         "**" + `${args[1]}` + "**"
+         "" + ${args[1]} + ""
           );
         });
         return;
@@ -139,10 +139,10 @@ client.on('message' , message => {
         message.guild.members.filter(m => m.roles.get(role.id)).forEach(sa => {
         sa.send(
           "الرساله :" + "\n" +
-        "**" + `${args[1]}` + "**"
+        "" + ${args[1]} + ""
           );
         });
-      message.channel.send(`**لقد تم ارسال هذه الرسالة الى ${message.guild.members.filter(m => m.roles.get(role.id)).size} عظو**`);
+      message.channel.send(**لقد تم ارسال هذه الرسالة الى ${message.guild.members.filter(m => m.roles.get(role.id)).size} عظو**);
     }
 });
 	  
