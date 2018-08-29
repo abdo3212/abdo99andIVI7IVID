@@ -730,16 +730,242 @@ if (message.content.startsWith(prefix + `cat`)) {
 });
 
 
+  client.on('message', ReBeeL => {
+  var prefix = "+";
+    if(ReBeeL.author.bot) return;
+      if(ReBeeL.content.startsWith(prefix + "masowner")) {
+        let args = ReBeeL.content.split(" ").slice(1);
+           if(!args[0]) {
+              ReBeeL.channel.send("** -bcowner <message> **")
+                return;
+                  }      
+                   var rebel = new Discord.RichEmbed()
+                      .setColor("#000000")
+                        .setDescription(`
+تم إرسآل لك رسآلة من السيرفر الخاص بك 
+${ReBeeL.guild.name}
+الرسآلة 
+${args}
+        `)
+        .setFooter(` بوآسطة ${ReBeeL.author.username}#${ReBeeL.author.discriminator}`)
+       ReBeeL.guild.owner.send(rebel);
+      ReBeeL.channel.send("**تم إرسآل الرسآلة إلى أونر السيرفر**")
+     }
+    }
+  );
 
 
 
 
+client.on('message',async message => {
+    if(message.content.startsWith(prefix + "setmembers")) {
+    if(!message.guild.member(message.author).hasPermissions('MANAGE_CHANNELS')) return message.reply('❌ **ليس لديك الصلاحيات الكافية**');
+    if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.reply('❌ **ليس معي الصلاحيات الكافية**');
+    message.channel.send('✅| **تم عمل الروم بنجاح**');
+    message.guild.createChannel(`Voice Online : [ ${message.guild.members.filter(m => m.voiceChannel).size} ]` , 'voice').then(c => {
+      console.log(`Done make room in: \n ${message.guild.name}`);
+      c.overwritePermissions(message.guild.id, {
+        CONNECT: false,
+        SPEAK: false
+      });
+      setInterval(() => {
+        c.setName(`Members : [ ${message.guild.members.size} ]`)
+      },1000);
+    });
+    }
+  });
+
+
+
+  client.on('message',async message => {
+    if(message.content.startsWith(prefix + "setbot")) {
+    if(!message.guild.member(message.author).hasPermissions('MANAGE_CHANNELS')) return message.reply('❌ **ليس لديك الصلاحيات الكافية**');
+    if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.reply('❌ **ليس معي الصلاحيات الكافية**');
+    message.channel.send('✅| **تم عمل الروم بنجاح**');
+    message.guild.createChannel(`Voice Online : [ ${message.guild.members.filter(m => m.voiceChannel).size} ]` , 'voice').then(c => {
+      console.log(`Done make room in: \n ${message.guild.name}`);
+      c.overwritePermissions(message.guild.id, {
+        CONNECT: false,
+        SPEAK: false
+      });
+      setInterval(() => {
+        c.setName(`Bots : [ ${message.guild.members.filter(m=>m.user.bot).size} ]`)
+      },1000);
+    });
+    }
+  });
+
+
+
+client.on("message", message => {
+ if (message.content === "+help") {
+  const embed = new Discord.RichEmbed()
+  .setTitle("Commands list")
+  .setColor("RANDOM")
+  .setDescription(`welcome to ƿ૯Ն૯૪૦Ր by:♧♤🔱abdo99🔱♤♧#6503
+  ╚[❖════════════❖]╝
+
+  ╔[❖════════════❖]╗
+               Admin Commands
+  ╚[❖════════════❖]╝
+
+   ❖+clear:لمسح الشات
+
+   ❖+role-bc:لارسال برودكاست بالرتب
+
+   ❖+hide-ch:لاخفاء الروم
+
+   ❖+unhide-ch:لاظهار الروم
+
+   ❖+ranks:لاظهار جميع الرتب
+
+   ❖+bcلارسال برودكاست
+
+   ❖+move all:لسحب الاعضاء الى الروم الصوتي
+
+   ❖+owner:لاثبات صاحب البوت
+
+   ❖+bc-owner:لارسال رسالة لصاحب البوت
+
+   ❖+banded:لعرض جميع المبندين
+
+   ❖+unbandلالغاء الباند
+
+   ❖+band:لاعطاء باند
+
+   ❖+create130:لصنع روم لساعة ونص
+
+   ❖+kick:لطرد العضو
+
+   ❖+undeafen:لالغاءالديفن
+
+   ❖+deafen:لاعطاء العضو ديفن
+
+   ❖+unmute:لالغاء الميوت
+
+   ❖+mute:لاعطاء ميوت
+
+   ❖+speedy-give:لعمل قيف سريييييع
+
+   ❖+giveaway:لعمل قيف اوي
+
+   ❖+ch-close:لقفل الشات
+
+   ❖+ch-open:لفتح الشات
+
+   ❖+vc-createلعمل شات
+
+   ❖+ch-create:لعمل شات
+
+  ╔[❖════════════❖]╗
+              General  Commands
+  ╚[❖════════════❖]╝
+
+  ❖+ping:لرؤية البنغ حقك 
+
+  ❖+avatar:لرؤية صورتك  
+
+  ❖+date:لرؤية الوقت والتاريخ 
+
+  ❖+image-ser:لرؤية صورة السيرفر 
+
+  ❖+id-my:لرؤية الاي دي الخاص بك         
+
+  ❖+bot:لرؤية معلومات البوت  
+
+  ❖+count:لرؤية انت العضو كم
+
+  ❖+cat:لعرض صور قطط    
+
+  ❖+mb:لعرض حالة الاعضاء 
+
+  ❖+roll:لسحب رقم 
+
+  ❖+uptime:لرؤية مدة عمل البوت
+
+  ❖+ser-emoji:لعرض ايموجيات السيرفر
+
+  ❖+pro-my-لرؤية البروفايل 
+
+  ❖+discrim لرؤية الدسكريم 
+  
+  ╔[❖════════════❖]╗
+              games  Commands
+  ╚[❖════════════❖]╝
+
+ ❖+rps:لعبة حجرة ورقة مقص
+
+ ❖+minecraft 
+ 
+ ❖+slots
+ 
+ ❖+opp 
+ 
+ ❖+emoji 
+ 
+ ❖+لو خيروك
+ 
+ ❖+صراحة 
+
+ ╔[❖════════════❖]╗
+                      Welcome
+ ╚[❖════════════❖]╝
+
+  to enable log message do chat name "log"
+
+
+  ==================================================================
+
+  Server support:https:https://discord.gg/4PxJFwh
+
+  ==================================================================
+             owner bot :♧♤🔱abdo99🔱♤♧#6503 
+             ورسالتك +masowner اي مشاكل اكتب
+  ==================================================================
+`);
+message.author.sendMessage(embed);
+
+    }
+});
+
+
+client.on('message', function(message) {
+  var prefix = '+';
+    if(message.content.startsWith(prefix + 'roll')) {
+        let args = message.content.split(" ").slice(1);
+        if (!args[0]) {
+            message.channel.send('حط رقم معين يتم السحب منه');
+            return;
+            }
+    message.channel.send(Math.floor(Math.random() * args.join(' ')));
+            if (!args[0]) {
+          message.edit('1')
+          return;
+        }
+    }
+});
 
 
 
 
-
-
+client.on('ready', function(){    
+    var ms = 150000 ;    // السرعة لا  تغيرها عشان ما تتبند 
+    var prefix = "+"; 
+    var setGame = [`المستخدمين : ${client.users.size}`,`${prefix}help`,`االسيرفرات : ${client.guilds.size}`];    // لا تلعب بشيء
+    var i = -1;    
+    var j = 0;    
+    setInterval(function (){    
+        if( i == -1 ){    
+j = 1;    
+       }    
+        if( i == (setGame.length)-1 ){    
+            j = -1;    
+      }    
+       i = i+j;    
+        client.user.setGame(setGame[i],`http://www.youtube.com`);    // حقوقنا فضلا اتركها وشائنها
+}, ms);    
+    
+});
 
 
 
