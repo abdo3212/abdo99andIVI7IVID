@@ -73,10 +73,77 @@ client.on('message', message => {
 });
 
 
+client.on('message',function(message) {
+  if(!message.channel.guild) return;
+
+const prefix = "+";
+    if (message.content === prefix + "discrim") {
+let messageArray = message.content.split(" ");
+let args = messageArray.slice(1);
+
+if (message.author.bot) return;
+
+var discri = args[0]
+let discrim
+if(discri){
+discrim = discri;
+}else{
+discrim = message.author.discriminator;
+}
+if(discrim.length == 1){
+discrim = "000"+discrim
+}
+if(discrim.length == 2){
+discrim = "00"+discrim
+}
+if(discrim.length == 3){
+discrim = "0"+discrim
+}
+
+const users = client.users.filter(user => user.discriminator === discrim).map(user => user.username);
+return message.channel.send(`
+**Found ${users.length} users with the discriminator #${discrim}**
+${users.join('\n')}
+`);
+}
+});	
 
 
+client.on('message' , message => {
+  var prefix = "+";
+  if(message.author.bot) return;
+  if(message.content.startsWith(prefix +"role-bc")) {
+    let args = message.content.split(" ").slice(1);
 
+    if(!args[0]) {
+      message.channel.send("قم بمنشنه رتبه معينه");
+        return;
+    }
 
+      if(args[0] == "@everyone") {
+        message.channel.send(`لقد تم ارسال هذه الرسالة الى ${message.guild.memberCount} اعضاء`);
+        message.guild.members.forEach(mi => {
+          mi.send(
+          "الرسالة :" + "\n" +
+         "**" + `${args[1]}` + "**"
+          );
+        });
+        return;
+      }
+          var role = message.mentions.roles.first();
+            if(!role) {
+              message.reply("يرجا كتابه اسم رتبه موجوده");
+                return;
+            }
+        message.guild.members.filter(m => m.roles.get(role.id)).forEach(sa => {
+        sa.send(
+          "الرساله :" + "\n" +
+        "**" + `${args[1]}` + "**"
+          );
+        });
+      message.channel.send(`**لقد تم ارسال هذه الرسالة الى ${message.guild.members.filter(m => m.roles.get(role.id)).size} عظو**`);
+    }
+});
 
 
 
