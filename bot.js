@@ -146,7 +146,31 @@ client.on('message' , message => {
 });
 
 
+client.on('message', message => {
+var prefix = "+";
+      if(message.content === prefix + "hide-ch") {
+      if(!message.channel.guild) return;
+      if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('You Dont Have Perms ❌');
+             message.channel.overwritePermissions(message.guild.id, {
+             READ_MESSAGES: false
+ })
+              message.channel.send('Channel Hided Successfully ! ✅  ')
+ }
+});
+	  
 
+	  
+client.on('message', message => {
+var prefix = "+";
+      if(message.content === prefix + "unhide-ch") {
+      if(!message.channel.guild) return;
+      if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('❌');
+             message.channel.overwritePermissions(message.guild.id, {
+             READ_MESSAGES: true
+ })
+              message.channel.send('Done  ')
+ }
+});	
 
 
 
