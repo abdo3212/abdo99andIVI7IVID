@@ -1491,6 +1491,147 @@ client.on('message', message => {0
 
 
 
+client.on('guildCreate', guild => {
+  client.channels.get("460821894204096512").send(`:white_check_mark: **تم اضافة بوتك في سيرفر جديد 
+Server name: __${guild.name}__
+Server owner: __${guild.owner}__
+Server id: __${guild.id}__ 
+Server Count: __${guild.memberCount}__**`)
+});
+client.on('guildDelete', guild => {
+  client.channels.get("460821894204096512").send(`:negative_squared_cross_mark: **تم خروج بوتك من السيرفر 
+Server name: __${guild.name}__
+Server owner: __${guild.owner}__
+Server id: __${guild.id}__ 
+Server Count: __${guild.memberCount}__**`)
+});
+
+
+
+
+
+client.on('guildMemberAdd', eyad => {
+  let channel = eyad.guild.channels.find('name', 'log');
+  let memberavatar = eyad.user.avatarURL
+    if (!channel) return;
+  let embed = new Discord.RichEmbed()
+      .setColor('GREEN')
+      .setThumbnail(memberavatar)
+      .setTitle('Member joined')
+  .setTitle('Member Joined')
+      .addField('UserName : ',`${eyad}`)
+      .addField('User Id :', "**[" + `${eyad.id}` + "]**" )
+      .addField('MemberCount :',`${eyad.guild.memberCount}`)
+      .addField('Server: ', `${eyad.guild.name}`,true)                          
+      .setFooter(" Join Log ! ")
+      .setTimestamp()
+ 
+    channel.sendEmbed(embed);
+  });
+
+
+client.on('guildMemberRemove', eyad => {
+  let channel = eyad.guild.channels.find('name', 'log');
+  let memberavatar = eyad.user.avatarURL
+    if (!channel) return;
+  let embed = new Discord.RichEmbed()
+      .setColor('RED')
+      .setThumbnail(memberavatar)
+  .setTitle('Member Left')
+      .addField('UserName : ',`${eyad}`)
+      .addField('User Id :', "**[" + `${eyad.id}` + "]**" )
+      .addField('MemberCount :',`${eyad.guild.memberCount}`)
+      .addField('Server: ', `${eyad.guild.name}`,true)                          
+      .setFooter(" Leave Log ! ")
+      .setTimestamp()
+ 
+    channel.sendEmbed(embed);
+      });
+
+client.on('messageDelete', message => {
+	if(message.author.bot) return;
+	if(message.content.toUpperCase().startsWith(prefix || '#' || '!' || '->')) return;
+	var MsgDelete = new Discord.RichEmbed()
+	.setTitle(`:wastebasket: **[MESSAGE DELETE]**`)
+	.setThumbnail(client.user.avatarURL)
+	.setColor('GRAY')
+	.setDescription(`**\n➥ الاسم:**\n<@${message.author.id}>\n\n**➥ الرسالة التي تم مسحها:**\n\`\`\`${message}\`\`\`\n**➥ في روم:**\n${message.channel}`)
+	.setTimestamp()
+	.setFooter(`${message.author.username}#${message.author.discriminator}`, message.author.avatarURL)
+	if(!message.guild.channels.find('name', 'log')) return;
+	message.guild.channels.find('name', 'log').send(MsgDelete);
+});
+
+client.on('messageUpdate', (oldMessage, newMessage) => {
+	if(newMessage.author.bot) return;
+	var guild = newMessage.guild;
+	const MsgEdit = new Discord.RichEmbed()
+	.setTitle(`:gear: **[MESSAGE EDIT]**`)
+	.setThumbnail(client.user.avatarURL)
+	.setColor('GRAY')
+	.setDescription(`**\n➥ الاسم:**\n<@${newMessage.author.id}>\n\n**➥ قبل التعديل:**\n\`\`\`${oldMessage}\`\`\`\n**➥ بعد التعديل:**\n\`\`\`${newMessage}\`\`\`\n**➥ في روم:**\n${newMessage.channel}`)
+	.setTimestamp()
+	.setFooter(`${newMessage.author.username}#${newMessage.author.discriminator}`, newMessage.author.avatarURL)
+	if(!guild.channels.find('name', 'log')) return;
+	guild.channels.find('name', 'log').send(MsgEdit);
+});
+
+// عند صناعة رتبه او مسحها
+ client.on("roleCreate", rc => {
+	 var channel = rc.guild.channels.find("name", "log");
+	 if(!channel) return;
+	 rc.guild.fetchAuditLogs()
+	 .then(logs => {
+		 let user = logs.entries.first().executor.id;
+		 var roleCreate = new Discord.RichEmbed()
+		 .setTitle(':white_check_mark: **[ROLE CREATE]**')
+		 .setThumbnail(client.user.avatarURL)
+		 .setDescription(`**\n➥ اسم الرتبة:**\n\`\`${rc.name}\`\`\n\n**➥ بواسطة:**\n<@${user}>`)
+		 .setColor('GRAY')
+		 .setTimestamp()
+		 .setFooter(`This Bot was Developed For [ ${rc.guild.name} ]`, client.user.avatarURL)
+		 
+		 channel.send(roleCreate);
+	 })
+});
+
+client.on("roleDelete", rd => {
+	 var channel = rd.guild.channels.find("name", "log");
+	 if(!channel) return;
+	 rd.guild.fetchAuditLogs()
+	 .then(logs => {
+		 let user = logs.entries.first().executor.id;
+		 var roleDelete = new Discord.RichEmbed()
+		 .setTitle(':negative_squared_cross_mark: **[ROLE DELETE]**')
+		 .setThumbnail(client.user.avatarURL)
+		 .setDescription(`**\n➥ اسم الرتبة:**\n\`\`${rd.name}\`\`\n\n**➥ بواسطة:**\n<@${user}>`)
+		 .setColor('GRAY')
+		 .setTimestamp()
+		 .setFooter(`This Bot was Developed For [ ${rd.guild.name} ]`, client.user.avatarURL)
+		 
+		 channel.send(roleDelete);
+	 })
+});
+
+// عند صناعة روم او مسحه
+client.on('channelCreate', cc => {
+	if(!cc.guild) return;
+	 var channel = cc.guild.channels.find('name', 'log');
+	 if(!channel) return;
+	 cc.guild.fetchAuditLogs()
+	 .then(logs => {
+		 let user = logs.entries.first().executor.id;
+		 var channelCreate = new Discord.RichEmbed()
+		 .setTitle(':white_check_mark: **[CHANNEL CREATE]**')
+		 .setThumbnail(client.user.avatarURL)
+		 .setDescription(`**\n➥ اسم الروم:**\n<#${cc.id}>\n\n**➥ بواسطة:**\n<@${user}>`)
+		 .setColor('GRAY')
+		 .setTimestamp()
+		 .setFooter(`This Bot was Developed For [ ${cc.guild.name} ]`, client.user.avatarURL)
+		 
+		 channel.send(channelCreate);
+	 })
+});
 
 
 
