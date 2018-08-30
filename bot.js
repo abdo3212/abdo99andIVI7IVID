@@ -1524,7 +1524,6 @@ client.on('channelDelete', dc => {
 });
 
 
-const Discord = require("discord.js");
 const client = new Discord.Client();
 var prefix = "+"
 const moment = require('moment');
