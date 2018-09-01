@@ -2200,16 +2200,13 @@ message.author.sendMessage(embed);
 
 
     client.on("message", async message => {
-var prefix = "+";
 var aoasm =[
     {q:"1سؤال ",a:"1الجواب"},
     {q:"2سؤال ",a:"2الجواب"},
     {q:"3سؤال ",a:"3الجواب"},
     
    ];
-    if(message.content == prefix+"lol"){
-        if(UserBlocked.has(message.guild.id)) return message.channel.send("هناك جلسة .")
-        UserBlocked.add(message.guild.id)
+    if(message.content == prefix+"lol")
         var ask = aoasm[Math.floor(Math.random() * aoasm.length)];
         let embed = new Discord.RichEmbed()
         .setTitle('LOL')
