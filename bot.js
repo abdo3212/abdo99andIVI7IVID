@@ -2234,7 +2234,7 @@ var aoasm =[
                 .setColor("RANDOM")
                 .setDescription(`**${result.author.username}** الإجابة خاطئة`);
                 message.channel.sendEmbed(embedx);
-	 })
+}
 });
 
 
