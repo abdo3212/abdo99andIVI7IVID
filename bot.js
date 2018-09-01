@@ -2199,12 +2199,12 @@ message.author.sendMessage(embed);
 
 
 
-   client.on("message", async message => {
+    client.on("message", async message => {
 var prefix = "+";
 var aoasm =[
-    {q:"سؤال ",a:"الجواب"},
-    {q:"سؤال ",a:"الجواب"},
-    {q:"سؤال ",a:"الجواب"},
+    {q:"1سؤال ",a:"1الجواب"},
+    {q:"2سؤال ",a:"2الجواب"},
+    {q:"3سؤال ",a:"3الجواب"},
     
    ];
     if(message.content == prefix+"lol"){
@@ -2241,7 +2241,6 @@ var aoasm =[
      });
   }
 });
-
 
 
 
