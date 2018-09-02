@@ -1183,8 +1183,8 @@ ${user} انت معاقب بميوت كتابي بسبب مخالفة القوا
 }  
 });	  
 
-client.on('message', message => { 
-    if (message.content.startsWith('+unmute')) {
+client.on('message', message => {//unmute
+    if (message.content.startsWith('فك')) {
   if (!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send("**انت لا تمتلك الخاصيه المطلوبه** | ❎ ");
    let men = message.mentions.users.first()
    let mas = message.author
@@ -1200,9 +1200,8 @@ client.on('message', message => {
    <@${men.id}>
   تم فك الميوت الكتابي
   بواسطة : <@${message.author.id}> **`)
-  .setThumbnail("https://cdn.discordapp.com/attachments/408952032112803850/452093541003296788/start-button-hi.png")
 
-  Rocket.users.get(men.id).sendEmbed(embed)
+  client.users.get(men.id).sendEmbed(embed)
   const Embed11 = new Discord.RichEmbed()
   .setColor("RANDOM")
   .setAuthor(message.guild.name, message.guild.iconURL)
@@ -1210,7 +1209,6 @@ client.on('message', message => {
   تم فك الميوت الكتابي
   بواسطة : <@${message.author.id}>
   `)
-  .setThumbnail("https://cdn.discordapp.com/attachments/408952032112803850/452093541003296788/start-button-hi.png")
   message.channel.sendEmbed(Embed11).then(message => {message.delete(20000)})
       }
 });
