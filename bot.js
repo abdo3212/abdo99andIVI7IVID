@@ -1018,33 +1018,61 @@ if (message.content.startsWith(prefix + "uptime")) {
 
 }
 });	
-client.on('message', message => {
-var prefix = "+"
-  if (message.author.omar) return;
-  if (!message.content.startsWith(prefix)) return;
-  var command = message.content.split(" ")[0];
-  command = command.slice(prefix.length);
-  var args = message.content.split(" ").slice(1);
-  if (command == "band") {
-   if(!message.channel.guild) return message.reply('** This command only for servers**');
-  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("**لايوجد لديك ` BAN_MEMBERS ` صلاحية**");
-if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.reply("**ليس لدي صلاحيات لتبنيد العضو **");
-var user = message.mentions.users.first();
-  var reason = message.content.split(" ").slice(2).join(" ");
-  if (message.mentions.users.size < 1) return message.reply("**منشن شخص**");
-  if(!reason) return message.reply ("**اكتب سبب الطرد**");
-  if (!message.guild.member(user).banable) return message.reply("**لايمكن تبنيد  شخص اعلى من رتبتي يرجه اعطاء البوت رتبة  عالية**");
-  const banembed = new Discord.RichEmbed()
-  .setAuthor(`BAN!`, user.displayAvatarURL)
-  .setColor("RANDOM")
-  .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
-  .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
-  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
-  user.send(reason).then(()=>{
-message.guild.member(user).kick();
-  })
-}
-});		   
+
+
+
+
+
+client.on('message', async message => {
+    let date = moment().format('Do MMMM YYYY , hh:mm');
+    let User = message.mentions.users.first();
+    let Reason = message.content.split(" ").slice(3).join(" ");
+    let messageArray = message.content.split(" ");
+    let time = messageArray[2];
+    if(message.content.startsWith(prefix + "بند")) {
+       if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.channel.send("**- You don't have the needed permissions!**");
+       if(!User) message.channel.send("**- Mention someone!**");
+       if(User.id === client.user.id) return message.channel.send("**- You cannot ban me!**");
+       if(User.id === message.guild.owner.id) return message.channel.send("**- You cannot ban the owner of the server!**");
+       if(!time) return message.channel.send("**- Supply a duration!**");
+       if(!time.match(/[1-7][s,m,h,d,w]/g)) return message.channel.send('**- Supply a real time!**');
+       if(!Reason) message.channel.send("**- Supply a reason!**");
+       let banEmbed = new Discord.RichEmbed()
+       .setAuthor(`You have been banned from ${message.guild.name} !`)
+       .setThumbnail(message.guild.iconURL || message.guild.avatarURL)
+       .addField('- Banned By: ',message.author.tag,true)
+       .addField('- Reason:',Reason,true)
+       .addField('- Banned At:',date,true)
+       .addField('- Duration:',time,true)
+       .setFooter(message.author.tag,message.author.avatarURL);
+       User.sendMessage({embed: banEmbed}).then(() => message.guild.member(User).ban({reason: Reason}))
+       .then(() => message.channel.send(`**# Done! I banned: ${User}**`)).then(() => { setTimeout(() => {
+           message.guild.unban(User);
+       }, mmss(time));
+    });
+   }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		   
 client.on('message', message => {
     var prefix = "+"
@@ -2241,40 +2269,7 @@ client.on('message', message => {
 
 
 
-  const devs = ["406076958980571147"];
-const adminprefix = ["+"];
-client.on('message', message => {
-    var argresult = message.content.split(` `).slice(1).join(' ');
-      if (!developer.includes(message.author.id)) return;
-      
-  if (message.content.startsWith(adminprefix + 'ply')) {
-    client.user.setGame(argresult);
-      message.channel.send(`**✅   ${argresult}**`)
-  } else 
-     if (message.content === (adminprefix + "leave")) {
-    message.guild.leave();        
-  } else  
-  if (message.content.startsWith(adminprefix + 'wt')) {
-  client.user.setActivity(argresult, {type:'WATCHING'});
-      message.channel.send(`**✅   ${argresult}**`)
-  } else 
-  if (message.content.startsWith(adminprefix + 'ls')) {
-  client.user.setActivity(argresult , {type:'LISTENING'});
-      message.channel.send(`**✅   ${argresult}**`)
-  } else 
-  if (message.content.startsWith(adminprefix + 'st')) {
-    client.user.setGame(argresult, "https://www.twitch.tv/idk");
-      message.channel.send(`**✅**`)
-  }
-  if (message.content.startsWith(adminprefix + 'setname')) {
-  client.user.setUsername(argresult).then
-      message.channel.send(`Changing The Name To ..**${argresult}** `)
-} else
-if (message.content.startsWith(adminprefix + 'setavatar')) {
-  client.user.setAvatar(argresult);
-    message.channel.send(`Changing The Avatar To :**${argresult}** `);
-}
-});
+ 
 
 
 
