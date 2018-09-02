@@ -2201,7 +2201,40 @@ message.author.sendMessage(embed);
 
 
 
+const bannedwords = [
+  "+ping",
+  "+profile",
+  "#rep",
+  "#top",
+  "%level",
+  "%تقديم",
+  "+play",
+  "+stop",
+  "-p",
+  "+s",
+  "!invites",
+  "!top",
+  "-skip"
 
+]
+client.on('message', message => {
+  var Muted = message.guild.roles.find("name", "muted");
+  var warn = message.guild.roles.find("name", "warn");
+  if(bannedwords.some(word => message.content.includes(word))) {
+  if(message.channel.id !== '481475376212606987') return;
+  if (message.author.bot) return;
+  if(message.member.roles.has(warn)) return;
+  if(!message.member.roles.has(warn.id)) {
+  message.member.addRole(warn)
+  message.reply("**`تم اعطائك تحذير لاستخدام اوامر البوت فى الشات العام` 😠**")
+  }
+  if(message.member.roles.has(warn.id)) {
+      message.member.addRole(Muted)
+      message.member.removeRole(warn)
+      message.reply("**`تم اعطائك ميوت كتابى تواصل مع احد اعضاء الادارة لازالتة` 🤐**")
+  }
+  }
+  })
 
 
 
