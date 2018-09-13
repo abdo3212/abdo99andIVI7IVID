@@ -105,7 +105,7 @@ ${users.join('\n')}
 	  
 client.on('message', message => {
 var prefix = "+";
-      if(message.content === prefix + "unhide-ch") {
+      if(message.content === prefix + "show") {
       if(!message.channel.guild) return;
       if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('❌');
              message.channel.overwritePermissions(message.guild.id, {
