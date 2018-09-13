@@ -168,29 +168,6 @@ client.on("guildMemberAdd", member => {
 })
 	
 
-client.on('message', message =>{
-    let args = message.content.split(' ');
-    let prefix = '+'; //تقدر تغير البرفكس
-    
-    if(args[0] === `${prefix}avatar`){
-        let mentions = message.mentions.members.first()
-        if(!mentions) {
-          let sicon = message.author.avatarURL
-          let embed = new Discord.RichEmbed()
-          .setImage(message.author.avatarURL)
-          .setColor("#f7abab") 
-          .setDescription(`**${message.author.username}#${message.author.discriminator}**'s avatar :`);
-          message.channel.send({embed})
-        } else {
-          let sicon = mentions.user.avatarURL
-          let embed = new Discord.RichEmbed()
-          .setColor("#f7abab")
-          .setDescription(`**${mentions.user.username}#${mentions.user.discriminator}**'s avatar :`)
-          .setImage(sicon)
-          message.channel.send({embed})
-        }
-    };
-});
 
 
 
@@ -833,7 +810,7 @@ j = 1;
   client.on('message', message => {
     var prefix = "+"
 var args = message.content.split(" ").slice(1);    
-if(message.content.startsWith(prefix + 'my-pro')) {
+if(message.content.startsWith(prefix + 'profile')) {
 var year = message.author.createdAt.getFullYear()
 var month = message.author.createdAt.getMonth()
 var day = message.author.createdAt.getDate()
@@ -911,7 +888,7 @@ client.on('message', function(msg) {
   client.on('message', message => {
 
 if (message.author.bot) return;
-    if (message.content ===  prefix + "close-ch") {
+    if (message.content ===  prefix + "close") {
                         if(!message.channel.guild) return message.reply(' This command only for servers');
 
 if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply(' ليس لديك صلاحيات');
@@ -922,7 +899,7 @@ if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply(' لي
                message.reply("تم تقفيل الشات ✅ ")
            });
              }
-if (message.content === prefix + "open-ch") {
+if (message.content === prefix + "open") {
     if(!message.channel.guild) return message.reply(' This command only for servers');
 
 if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('ليس لديك صلاحيات');
