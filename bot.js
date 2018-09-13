@@ -42,31 +42,24 @@ client.user.setGame(`by abdo99 +help`,"http://twitch.tv")
 }); 
 
 
-client.on('message', message => {
-     if(message.content.startsWith(prefix + "clear")) {
-         var args = message.content.split(" ").slice(1);
- if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('You need MANAGE_MESSAGES permission noob');
-  if (!args[0]) return message.channel.send(' حط مسافة بعد الكلمة وحط رقم لا يتعدى 100 !!');
+client.on("message", message => {
+    var args = message.content.substring(prefix.length).split(" ");
+    if (message.content.startsWith(prefix + "clear")) {
+        if(!message.channel.guild) return message.reply('**:x: اسف لكن هذا الامر للسيرفرات فقط **');         
+if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('**⚠  لا يوجد لديك صلاحية لمسح الشات**');
+var msg;
+msg = parseInt();
 
-  message.channel.bulkDelete(args[0]).then(() => {
-    const embed = new Discord.RichEmbed()
-      .setColor(0xF16104)
-      .setDescription(`Cleared ${args[0]} messages.`);
-    message.channel.send({ embed });
+message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
+message.channel.sendMessage("", {embed: {
+title: "``تــم مسح الشات ``",
+color: 0x06DF00,
+footer: {
+  
+}
+}}).then(msg => {msg.delete(3000)});
+                  }
 
-    const actionlog = message.guild.channels.find('name', 'log');
-
-    if (!actionlog) return message.channel.send('Can\'t find action-log channel. Are you sure that this channel exists and I have permission to view it? **CANNOT POST LOG.**');
-    const embedlog = new Discord.RichEmbed()
-      .setDescription('~Purge~')
-      .setColor(0xF16104)
-      .addField('Purged By', `<@${message.author.id}> with ID ${message.author.id}`)
-      .addField('Purged in', message.channel)
-      .addField('Time', message.createdAt);
-    actionlog.send(embedlog);
-   
-  });
-};
 
 });
 
